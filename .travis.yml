@@ -12,7 +12,7 @@ matrix:
           sources:
           - ubuntu-toolchain-r-test # For newer GCC
           - george-edison55-precise-backports #
-        packages:
+          packages:
           - autoconf
           - automake
           - iverilog
