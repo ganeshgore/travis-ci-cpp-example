@@ -3,6 +3,19 @@ language: c
 
 #sudo: false # only for faster builds
 
+
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test # For newer GCC
+          - george-edison55-precise-backports #
+        packages:
+          - autoconf
+          - automake
+
 install:
 - cd ${TRAVIS_BUILD_DIR}
 # install latest LCOV (1.9 was failing for me) [1]
@@ -15,7 +28,7 @@ install:
 - gem install coveralls-lcov
 
 
-before_script: 
+before_script:
 - cd ${TRAVIS_BUILD_DIR}
 - lcov --directory . --zerocounters
 
@@ -26,7 +39,7 @@ compiler:
 
 
 # Build steps
-script: 
+script:
   - cd ${TRAVIS_BUILD_DIR}
   - make && ./test-library.out
 
@@ -37,6 +50,6 @@ after_success:
 - lcov --remove coverage.info 'tests/*' '/usr/*' 'test-library*' --output-file coverage.info # filter out system and test code
 - lcov --list coverage.info # debug before upload
 #- coveralls-lcov --repo-token ${COVERALLS_TOKEN} coverage.info # uploads to coveralls.. for a private repo using a token
-- coveralls-lcov  coverage.info #for open source 
+- coveralls-lcov  coverage.info #for open source
 
 
