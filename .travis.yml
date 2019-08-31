@@ -4,19 +4,6 @@ language: c
 #sudo: false # only for faster builds
 
 
-matrix:
-  include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-          - ubuntu-toolchain-r-test # For newer GCC
-          - george-edison55-precise-backports #
-          packages:
-          - autoconf
-          - automake
-          - iverilog
-
 install:
 - cd ${TRAVIS_BUILD_DIR}
 # install latest LCOV (1.9 was failing for me) [1]
@@ -27,6 +14,7 @@ install:
 
 # install lcov to coveralls conversion + upload tool
 - gem install coveralls-lcov
+- sudo apt-get instal iverilog
 
 
 before_script:
