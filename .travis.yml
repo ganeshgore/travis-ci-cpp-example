@@ -27,4 +27,4 @@ before_install:
 - chmod 600 ./deploy_key
 - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - ssh-add ./deploy_key
-- ssh -v -i ./deploy_key u1249762@lab1-1.eng.utah.edu pwd
+- ssh -v -o StrictHostKeyChecking=no -i ./deploy_key u1249762@lab1-1.eng.utah.edu pwd
